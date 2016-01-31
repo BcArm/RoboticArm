@@ -1,3 +1,4 @@
+
 function y = goToDegree(motorNo,degree)
 %This function takes motor number and degree for all servos and mapps it into
 %the range for each motor
@@ -15,7 +16,7 @@ function y = goToDegree(motorNo,degree)
             elseif( value < 110 )
                 value = 110 ;
             end
-    elseif ( motorNo == '3' )
+    elseif ( motorNo == '6' )%%%%%%%%%%%%%%%
             value = (127/45)*degree + 400 ;
             if( value > 630 )
                 value = 630 ;
@@ -35,7 +36,7 @@ function y = goToDegree(motorNo,degree)
             else
                 value = 348 ;
             end
-    elseif ( motorNo == '6' )
+    elseif ( motorNo == '3' )%%%%%%%%%%%%%%%%%%%%
             if( strcmp(degree,'open') )
                 value = 490 ;
             else

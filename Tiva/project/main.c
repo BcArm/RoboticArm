@@ -65,12 +65,19 @@ int main(void)
 	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, period-1);
 
 	//Set PWM duty
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,364);
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,130);
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,400);
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,386);
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,590);
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,300);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - 364);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - 130);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,5000 - 400);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - 386);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,5000 - 590);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - 300);
+
+	/*PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,364);
+		PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,130);
+		PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,400);
+		PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,386);
+		PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,590);
+		PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,300);*/
 
 	// Enable the PWM generator
 	PWMGenEnable(PWM1_BASE, PWM_GEN_0);
@@ -111,22 +118,22 @@ int main(void)
 		switch(motorNo)
 		{
 			case '1':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,sum);
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - sum);
 				break;
 			case '2':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,sum);
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - sum);
 				break;
 			case '3':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,sum);
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,5000 - sum);
 				break;
 			case '4':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,sum);
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - sum);
 				break;
 			case '5':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,sum);
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,5000 - sum);
 				break;
 			case '6':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,sum);
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - sum);
 				break;
 			default:;
 		}
