@@ -14,7 +14,7 @@ function output = invKinematics(x,y,Z,T,g)
     output = [1 2 3 4 5 0];
     g(3)=g(3)-90; %convert theta4 from arm angle to DH frame angle
     guess = g;
-    sApproach = 1.1;%slope of approach vector
+    sApproach = 1.05;%slope of approach vector
     flag=0; %flag for error accpetance
     options = optimoptions('fsolve','FunValCheck','off','Display','off');
 
@@ -52,8 +52,8 @@ function output = invKinematics(x,y,Z,T,g)
         end
     end
 
-    for i= 1:21
-        sApproach=sApproach-0.1;
+    for i= 1:41
+        sApproach=sApproach-0.05;
         solve;
         check;
         
@@ -77,7 +77,7 @@ function output = invKinematics(x,y,Z,T,g)
     if(~flag)
         disp('error angles not found');
     end
-    
+    output
     if( size(output,1) > 2 )
         prevThetas = [theta1 g(1) g(2) g(3)+90];
         nearest = output(2,:);

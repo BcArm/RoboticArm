@@ -1,4 +1,4 @@
-function [] = drawLine( x0,y0,z0,x1,y1,z1,T,obj,divisions )
+function [th1,th2,th3,th4,th5] = drawLineShapes( x0,y0,z0,x1,y1,z1,T,divisions )
     syms x y z
     xflag = false;
     yflag = false;
@@ -135,45 +135,5 @@ function [] = drawLine( x0,y0,z0,x1,y1,z1,T,obj,divisions )
         th4(i) = s(4);
         th5(i) = s(5);
     end
-    'khalaaaaaaaaaaast'
-    pause(5);
-    %move the arm on the path
-     for i=1:divisions+1
-        t = forwardKinematics(th1(i),th2(i),th3(i),th4(i),th5(i),T);
-        xVecNew(i) = t(1,4);
-        yVecNew(i) = t(2,4);
-        zVecNew(i) = t(3,4);
-        pause(0.01);
-        fwrite(obj,goToDegree('1',th1(i)));
-        pause(0.00001);
-        fwrite(obj,goToDegree('2',th2(i)));
-        pause(0.00001);
-        fwrite(obj,goToDegree('6',th3(i)));%%%%%%%%%
-        pause(0.00001);
-        fwrite(obj,goToDegree('4',th4(i)));
-        pause(0.0001);
-        %fwrite(obj,goToDegree('5',th5(i)));
-        %pause(0.001);
-     end
-     figure
-     plot(th1)
-     figure
-     plot(th2)
-     figure
-     plot(th3)
-     figure
-     plot(th4)
-     figure
-     set(gcf,'NumberTitle','off')
-     set(gcf,'Name',strcat('Both Lines')) 
-     plot3(xVecNew,yVecNew,zVecNew,xVec,yVec,zVec);
-     figure
-     set(gcf,'NumberTitle','off')
-     set(gcf,'Name',strcat('Original Line'))
-     plot3(xVec,yVec,zVec);
-     figure
-     set(gcf,'NumberTitle','off')
-     set(gcf,'Name',strcat('After Inverse'))
-     plot3(xVecNew,yVecNew,zVecNew);
 end
 
