@@ -122,8 +122,6 @@ function [th1,th2,th3,th4,th5] = drawLineShapes( x0,y0,z0,x1,y1,z1,T,divisions )
     th3(1) = s(3);
     th4(1) = s(4);
     th5(1) = s(5);
-
-    %t = forwardKinematics(th1(1),th2(1),th3(1),th4(1),th5(1),T);
     
     %get theta vectors
     for i=2:divisions+1

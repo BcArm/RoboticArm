@@ -24,16 +24,10 @@ function [] = drawSquare( x1,y1,z1,x2,y2,z2,x3,y3,z3,x4,y4,z4,T,obj,divisions )
     
     for i=1:size(th1,2)
         pause(1);
-        fwrite(obj,goToDegree('1',th1(i)));
-        pause(0.00001);
-        fwrite(obj,goToDegree('2',th2(i)));
-        pause(0.00001);
-        fwrite(obj,goToDegree('6',th3(i)));%%%%%%%%%
-        pause(0.00001);
-        fwrite(obj,goToDegree('4',th4(i)));
-        %pause(0.0001);
-        %fwrite(obj,goToDegree('5',th5(i)));
-        %pause(0.001);
+        duty = goToDegree(th1(i),th2(i),th3(i),th4(i),th5(i),0);
+        fwrite(obj,duty(1:9));
+        pause(0.01)
+        fwrite(obj,duty(10:18));
     end
 end
 

@@ -23,7 +23,6 @@ void delayMS(int ms)
 int main(void)
 {
 	uint32_t period = 5000; //20ms (16Mhz / 64pwm_divider / 50) //for the pwm freq to be 50 Hz///5000
-	uint32_t duty = 300;
 
 	//Set the clock to 16 MHz
 	SysCtlClockSet(SYSCTL_SYSDIV_1 | SYSCTL_USE_OSC |   SYSCTL_OSC_MAIN | SYSCTL_XTAL_16MHZ);
@@ -91,89 +90,86 @@ int main(void)
 	UART_Init();    // call the subroutine defined in "uart.h"
 	// to initialize UART for printingwhile(1)
 
-	char x[3];
-	uint32_t y[] = {0,0,0};
-	uint32_t sum = 0;
-	int i;
-	unsigned char motorNo;
-
-	int v;
+	char x;
+	uint32_t y;
+	uint32_t sum[6]={0,0,0,0,0,0};
+	uint32_t oldSum[6]={0,0,0,0,0,0};
+	uint32_t i,j,k,l;
 	while(1)
 	{
-		sum = 0 ;
-		for(i=0; i<4; i++)
+		for(k = 0 ; k < 6 ; k++)
 		{
-			if( i == 0 )
+			sum[k] = 0;
+		}
+
+		for(i = 0 ; i < 6 ; i++)
+		{
+			for(j = 0 ; j < 3 ; j++)
 			{
-				motorNo = UART_InChar();
+				x = UART_InChar();
+				y = (x -'0') * pow(10,2-(j));
+				sum[i] += y;
 			}
-			else
+		}
+
+		oldSum[0] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_0);
+		oldSum[1] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_1);
+		oldSum[2] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_2);
+		oldSum[3] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_5);
+		oldSum[4] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_6);
+		oldSum[5] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_7);
+
+		while((sum[0]!=oldSum[0])||(sum[1]!=oldSum[1])||(sum[2]!=oldSum[2])||(sum[3]!=oldSum[3])||(sum[4]!=oldSum[4])||(sum[5]!=oldSum[5]))
+		{
+			//delayMS(100);
+			if(sum[0]!=oldSum[0])
 			{
-				x[i-1] = UART_InChar();
-				y[i-1] = (x[i-1]-'0') * pow(10,2-(i-1));
-				sum += y[i-1];
+				if(sum[0] > oldSum[0])
+					oldSum[0]+=1;
+				else
+					oldSum[0]-=1;
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - oldSum[0]);
+			}
+			if(sum[1]!=oldSum[1])
+			{
+				if(sum[1] > oldSum[1])
+					oldSum[1]+=1;
+				else
+					oldSum[1]-=1;
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - oldSum[1]);
+			}
+			if(sum[2]!=oldSum[2])
+			{
+				if(sum[2] > oldSum[2])
+					oldSum[2]+=1;
+				else
+					oldSum[2]-=1;
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,5000 - oldSum[2]);
+			}
+			if(sum[3]!=oldSum[3])
+			{
+				if(sum[3] > oldSum[3])
+					oldSum[3]+=1;
+				else
+					oldSum[3]-=1;
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - oldSum[3]);
+			}
+			if(sum[4]!=oldSum[4])
+			{
+				if(sum[4] > oldSum[4])
+					oldSum[4]+=1;
+				else
+					oldSum[4]-=1;
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,5000 - oldSum[4]);
+			}
+			if(sum[5]!=oldSum[5])
+			{
+				if(sum[5] > oldSum[5])
+					oldSum[5]+=1;
+				else
+					oldSum[5]-=1;
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - oldSum[5]);
 			}
 		}
-
-		switch(motorNo)
-		{
-			case '1':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - sum);
-				break;
-			case '2':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - sum);
-				break;
-			case '3':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,5000 - sum);
-				break;
-			case '4':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - sum);
-				break;
-			case '5':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,5000 - sum);
-				break;
-			case '6':
-				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - sum);
-				break;
-			default:;
-		}
-
-		/*PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,200);
-		PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,200);
-		PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,200);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,200);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,200);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,200);
-
-delayMS(4000);
-
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,300);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,300);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,300);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,300);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,300);
-					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,300);
-					delayMS(4000);*/
-/*
-					for( v = 200 ; v < 351 ; v+=2 )
-		{
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,v);
-			delayMS(20);
-		}
-		for( v = 350 ; v > 199 ; v-=2 )
-		{
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_2,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,v);
-			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,v);
-			delayMS(20);
-		}*/
 	}
 }

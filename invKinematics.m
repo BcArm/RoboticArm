@@ -77,7 +77,6 @@ function output = invKinematics(x,y,Z,T,g)
     if(~flag)
         disp('error angles not found');
     end
-    output
     if( size(output,1) > 2 )
         prevThetas = [theta1 g(1) g(2) g(3)+90];
         nearest = output(2,:);

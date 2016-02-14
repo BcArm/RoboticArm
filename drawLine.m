@@ -138,42 +138,39 @@ function [] = drawLine( x0,y0,z0,x1,y1,z1,T,obj,divisions )
     'khalaaaaaaaaaaast'
     pause(5);
     %move the arm on the path
+    while(1)
+     pause(5);   
      for i=1:divisions+1
-        t = forwardKinematics(th1(i),th2(i),th3(i),th4(i),th5(i),T);
-        xVecNew(i) = t(1,4);
-        yVecNew(i) = t(2,4);
-        zVecNew(i) = t(3,4);
-        pause(0.01);
-        fwrite(obj,goToDegree('1',th1(i)));
-        pause(0.00001);
-        fwrite(obj,goToDegree('2',th2(i)));
-        pause(0.00001);
-        fwrite(obj,goToDegree('6',th3(i)));%%%%%%%%%
-        pause(0.00001);
-        fwrite(obj,goToDegree('4',th4(i)));
-        pause(0.0001);
-        %fwrite(obj,goToDegree('5',th5(i)));
-        %pause(0.001);
+%         t = forwardKinematics(th1(i),th2(i),th3(i),th4(i),th5(i),T);
+%         xVecNew(i) = t(1,4);
+%         yVecNew(i) = t(2,4);
+%         zVecNew(i) = t(3,4);
+        pause(0.2);
+        duty = goToDegree(th1(i),th2(i),th3(i),th4(i),th5(i),0);
+        fwrite(obj,duty(1:9));
+        pause(0.01)
+        fwrite(obj,duty(10:18));
      end
-     figure
-     plot(th1)
-     figure
-     plot(th2)
-     figure
-     plot(th3)
-     figure
-     plot(th4)
-     figure
-     set(gcf,'NumberTitle','off')
-     set(gcf,'Name',strcat('Both Lines')) 
-     plot3(xVecNew,yVecNew,zVecNew,xVec,yVec,zVec);
-     figure
-     set(gcf,'NumberTitle','off')
-     set(gcf,'Name',strcat('Original Line'))
-     plot3(xVec,yVec,zVec);
-     figure
-     set(gcf,'NumberTitle','off')
-     set(gcf,'Name',strcat('After Inverse'))
-     plot3(xVecNew,yVecNew,zVecNew);
+    end
+%      figure
+%      plot(th1)
+%      figure
+%      plot(th2)
+%      figure
+%      plot(th3)
+%      figure
+%      plot(th4)
+%      figure
+%      set(gcf,'NumberTitle','off')
+%      set(gcf,'Name',strcat('Both Lines')) 
+%      plot3(xVecNew,yVecNew,zVecNew,xVec,yVec,zVec);
+%      figure
+%      set(gcf,'NumberTitle','off')
+%      set(gcf,'Name',strcat('Original Line'))
+%      plot3(xVec,yVec,zVec);
+%      figure
+%      set(gcf,'NumberTitle','off')
+%      set(gcf,'Name',strcat('After Inverse'))
+%      plot3(xVecNew,yVecNew,zVecNew);
 end
 
