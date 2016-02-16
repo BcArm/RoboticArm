@@ -33,8 +33,11 @@ int main(void)
 	// Enable the peripherals used by this program.
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD); //PWM PINS (0,1)
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE); //PWM PINS (4)
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF); //PWM PINS (1,2,3)
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF); //PWM PINS (0,1,2,3)
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM1);  //Enable pwm module 1
+
+	HWREG(GPIO_PORTF_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;
+	HWREG(GPIO_PORTF_BASE + GPIO_O_CR)  |= 0x01;
 
 	//Configure PE4,PF0,PF1,PF2,PF3,PD0,PD1 Pins as PWM
 	GPIOPinConfigure(GPIO_PD0_M1PWM0);
@@ -44,6 +47,8 @@ int main(void)
 	GPIOPinConfigure(GPIO_PF1_M1PWM5);
 	GPIOPinConfigure(GPIO_PF2_M1PWM6);
 	GPIOPinConfigure(GPIO_PF3_M1PWM7);
+
+
 	GPIOPinTypePWM(GPIO_PORTD_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 	GPIOPinTypePWM(GPIO_PORTE_BASE, GPIO_PIN_4);
 	GPIOPinTypePWM(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);
@@ -67,7 +72,7 @@ int main(void)
 	//Set PWM duty
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - 364);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - 130);
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,5000 - 400);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,5000 - 300);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - 386);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,5000 - 590);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - 300);
@@ -132,7 +137,7 @@ int main(void)
 
 			while((oldSum[0]!=sum[z][0])||(oldSum[1]!=sum[z][1])||(oldSum[2]!=sum[z][2])||(oldSum[3]!=sum[z][3])||(oldSum[4]!=sum[z][4])||(oldSum[5]!=sum[z][5]))
 			{
-				//delayMS(100);
+				delayMS(6);
 				if(sum[z][0]!=oldSum[0])
 				{
 					if(sum[z][0] > oldSum[0])
@@ -182,7 +187,6 @@ int main(void)
 					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - oldSum[5]);
 				}
 			}
-			delayMS(100);
 		}
 	}
 
