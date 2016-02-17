@@ -15,14 +15,22 @@ function [] = drawTriangle( x1,y1,z1,x2,y2,z2,x3,y3,z3,T,obj,divisions )
     th4 = [th4 n4];
     th5 = [th5 n5];
     while(1)
-        pause(3);
-    for i=1:size(th1,2)
-        pause(0.1);
-        duty = goToDegree(th1(i),th2(i),th3(i),th4(i),th5(i),0);
-        fwrite(obj,duty(1:9));
-        pause(0.01)
-        fwrite(obj,duty(10:18));
-    end
+        pause(7);
+        %send number of points
+        if 3*divisions < 10
+         fwrite(obj,strcat('0','0',int2str(3*divisions+3)));   
+        elseif 3*divisions<100
+          fwrite(obj,strcat('0',int2str(3*divisions+3)));  
+        else
+         fwrite(obj,int2str(3*divisions+3));
+        end
+        for i=1:size(th1,2)
+            pause(0.1);
+            duty = goToDegree(th1(i),th2(i),th3(i),th4(i),th5(i),0);
+            fwrite(obj,duty(1:9));
+            pause(0.01)
+            fwrite(obj,duty(10:18));
+        end
     end
 end
 
