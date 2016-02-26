@@ -1,4 +1,4 @@
-function [] = drawLine( x0,y0,z0,x1,y1,z1,T,obj,divisions )
+function [] = drawLine( x0,y0,z0,x1,y1,z1,T,obj,divisions,gr )
     syms x y z
     xflag = false;
     yflag = false;
@@ -136,7 +136,7 @@ function [] = drawLine( x0,y0,z0,x1,y1,z1,T,obj,divisions )
         th5(i) = s(5);
     end
     'khalaaaaaaaaaaast'
-    pause(5);
+    %pause(5);
     %send number of points
      if divisions<10
      fwrite(obj,strcat('0','0',int2str(divisions+1)));   
@@ -155,7 +155,7 @@ function [] = drawLine( x0,y0,z0,x1,y1,z1,T,obj,divisions )
         duty = goToDegree(th1(i),th2(i),th3(i),th4(i),th5(i),0)
         fwrite(obj,duty(1:9));
         pause(0.01)
-        fwrite(obj,duty(10:18));
+        fwrite(obj,strcat(duty(10:15),int2str(gr)));
      end
 %      figure
 %      plot(th1)

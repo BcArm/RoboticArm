@@ -70,13 +70,20 @@ int main(void)
 	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, period-1);
 
 	//Set PWM duty
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - 364);
+	/*PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - 364);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - 130);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,5000 - 300);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - 386);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,5000 - 590);
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - 300);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - 300);*/
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,364);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,130);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,590);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,386);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,300);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,300);
 
+	////////////////////
 	// Enable the PWM generator
 	PWMGenEnable(PWM1_BASE, PWM_GEN_0);
 	PWMGenEnable(PWM1_BASE, PWM_GEN_1);
@@ -128,6 +135,7 @@ int main(void)
 
 		for (z=0; z<nrows; z++)
 		{
+			/*
 			oldSum[0] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_0);
 			oldSum[1] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_1);
 			oldSum[2] = 5000 - PWMPulseWidthGet(PWM1_BASE, PWM_OUT_4);
@@ -185,6 +193,66 @@ int main(void)
 					else
 						oldSum[5]-=1;
 					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - oldSum[5]);
+				}
+			}
+			*/
+			oldSum[0] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_0);
+			oldSum[1] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_1);
+			oldSum[2] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_4);
+			oldSum[3] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_5);
+			oldSum[4] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_6);
+			oldSum[5] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_7);
+
+			while((oldSum[0]!=sum[z][0])||(oldSum[1]!=sum[z][1])||(oldSum[2]!=sum[z][2])||(oldSum[3]!=sum[z][3])||(oldSum[4]!=sum[z][4])||(oldSum[5]!=sum[z][5]))
+			{
+				delayMS(6);
+				if(sum[z][0]!=oldSum[0])
+				{
+					if(sum[z][0] > oldSum[0])
+						oldSum[0]+=1;
+					else
+						oldSum[0]-=1;
+					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,oldSum[0]);
+				}
+				if(sum[z][1]!=oldSum[1])
+				{
+					if(sum[z][1] > oldSum[1])
+						oldSum[1]+=1;
+					else
+						oldSum[1]-=1;
+					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,oldSum[1]);
+				}
+				if(sum[z][2]!=oldSum[2])
+				{
+					if(sum[z][2] > oldSum[2])
+						oldSum[2]+=1;
+					else
+						oldSum[2]-=1;
+					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,oldSum[2]);
+				}
+				if(sum[z][3]!=oldSum[3])
+				{
+					if(sum[z][3] > oldSum[3])
+						oldSum[3]+=1;
+					else
+						oldSum[3]-=1;
+					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,oldSum[3]);
+				}
+				if(sum[z][4]!=oldSum[4])
+				{
+					if(sum[z][4] > oldSum[4])
+						oldSum[4]+=1;
+					else
+						oldSum[4]-=1;
+					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,oldSum[4]);
+				}
+				if(sum[z][5]!=oldSum[5])
+				{
+					if(sum[z][5] > oldSum[5])
+						oldSum[5]+=1;
+					else
+						oldSum[5]-=1;
+					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,oldSum[5]);
 				}
 			}
 		}

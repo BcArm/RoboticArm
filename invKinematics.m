@@ -1,4 +1,5 @@
 function output = invKinematics(x,y,Z,T,g)
+    Z = Z - 2.5;
     th5=0;
     th1 = atand(abs(y)/abs(x));
     if(y==0&&x==0)
