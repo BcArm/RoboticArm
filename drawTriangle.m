@@ -14,7 +14,7 @@ function [] = drawTriangle( x1,y1,z1,x2,y2,z2,x3,y3,z3,T,obj,divisions )
     th3 = [th3 n3];
     th4 = [th4 n4];
     th5 = [th5 n5];
-    save('triangle.mat',th1,th2,th3,th4,th5)
+    save('triangle.mat','th1','th2','th3','th4','th5')
     while(1)
         pause(7);
         %send number of points
