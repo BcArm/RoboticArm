@@ -2,6 +2,7 @@ import math
 import numpy as np
 from scipy.optimize import fsolve
 from scipy.optimize import root
+from scipy.optimize import least_squares
 from forwardKinematics import forwardKinematics
 def invKin(x,y,z,guess): #T
 	z = z-2.5 #Eliminate the effect of the base on z coordinate
@@ -34,7 +35,7 @@ def invKin(x,y,z,guess): #T
 		f = np.zeros(3)
 		f[0] = math.cos(th2-th3+th4) - sApproach
 		f[1] = 4*math.sin(th1)*( 2*math.cos(th2 - th3) - 5*math.sin(th2 - th3 + th4) + 2*math.cos(th2) )-y
-		f[2] = 8*math.sin(th2 - th3) + 20*math.cos(th2 - th3 + th4) + 8*math.sin(th2) + (31/5)-z;
+		f[2] = 8*math.sin(th2 - th3) + 20*math.cos(th2 - th3 + th4) + 8*math.sin(th2) + (31/5)-z
 		return f
 
 	#Compare coordinates resulted from computed angles with real coordinates
@@ -51,7 +52,7 @@ def invKin(x,y,z,guess): #T
 
 	for i in range (0,41):
 		sApproach = sApproach - 0.05
-		obj = root(solveFn,guess,method = 'hybr')
+		obj = least_squares(solveFn, guess, bounds = ([np.deg2rad(-7), np.deg2rad(-102), np.deg2rad(-97-90)], [np.deg2rad(181), np.deg2rad(81), np.deg2rad(86-90)]), method = 'dogbox')
 		r = obj.x
 		flag = check(th1,r[0],r[1],r[2],th5)
 		if (flag):
@@ -86,7 +87,6 @@ def invKin(x,y,z,guess): #T
 			diff4 = (prevThetas[3] - current[3])**2
 			D = diff1 + diff2 + diff3 + diff4
 			D = math.sqrt(D)
-			print D
 			if( D < minD ):
 				minD = D;
 				nearest = current		
