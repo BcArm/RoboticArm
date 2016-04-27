@@ -50,4 +50,4 @@ def goToDegree(deg1,deg2,deg3,deg4,deg5,deg6):
     value5 = str(value5)
     value6 = str(value6)
     
-    return value1 + value2 + value6 + value4 + value5 + value3
+    return value1 + value2 + value3 + value4 + value5 + value6

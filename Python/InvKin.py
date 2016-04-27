@@ -97,4 +97,4 @@ def invKin(x,y,z,guess): #T
 		print'No solution can be found'
 
 	return np.round(angles,decimals=1)
-print(invKin(0,36,8.7,[0,0,0]))
+#print(invKin(-10,25,8.7,[0,0,0]))
