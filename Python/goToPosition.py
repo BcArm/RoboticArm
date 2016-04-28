@@ -10,6 +10,7 @@ def GoToPos( x,y,z,gr ):
     print(s)
     #if the upcoming line is not working; try this:ser.write(b'obj,'0'+'0'+str(1)')
     duty = goToDegree(s[0],s[1],s[2],s[3],s[4],'open')
+    print(duty)
     ser.write(str(0)+str(0)+str(1))
     time.sleep(0.1)
     #use hint in the above comment if needed
@@ -18,4 +19,4 @@ def GoToPos( x,y,z,gr ):
     #use hint in the above comment if needed
     ser.write(duty[9:18]);
 
-GoToPos(0,36,8.7, 'open')
+GoToPos(-30,20,15,'open')

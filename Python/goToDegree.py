@@ -37,12 +37,12 @@ def goToDegree(deg1,deg2,deg3,deg4,deg5,deg6):
     else:
         value6 = 280 
 
-    value1 = round(value1)
-    value2 = round(value2)
-    value3 = round(value3)
-    value4 = round(value4)
-    value5 = round(value5)
-    value6 = round(value6)
+    value1 = int(round(value1))
+    value2 = int(round(value2))
+    value3 = int(round(value3))
+    value4 = int(round(value4))
+    value5 = int(round(value5))
+    value6 = int(round(value6))
     value1 = str(value1)
     value2 = str(value2)
     value3 = str(value3)
@@ -50,4 +50,4 @@ def goToDegree(deg1,deg2,deg3,deg4,deg5,deg6):
     value5 = str(value5)
     value6 = str(value6)
     
-    return value1 + value2 + value3 + value4 + value5 + value6
+    return value1 + value2 + value5 + value4 + value3 + value6
