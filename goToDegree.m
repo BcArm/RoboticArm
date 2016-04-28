@@ -52,7 +52,7 @@ function y = goToDegree(deg1,deg2,deg3,deg4,deg5,deg6)
     value4 = int2str(value4);
     value5 = int2str(value5);
     value6 = int2str(value6);
-    y = strcat(value1,value2,value5,value4,value3,value6);
+    y = strcat(value1,value2,value6,value4,value5,value3);
     %%%%3 and 5 
 end
 
