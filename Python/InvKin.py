@@ -44,7 +44,7 @@ def invKin(x,y,z,guess): #T
 		t1 = t1[:,3]
 		t2 = [x,y,z,1]
 		e = abs( t2 - t1 )
-		if( e[0] < 1 and e[1] < 1 and e[2] < 1 ):
+		if( e[0] < 0.3 and e[1] < 0.3 and e[2] < 0.3 ):
 			flag = 1
 		else:
 			flag = 0
@@ -53,6 +53,7 @@ def invKin(x,y,z,guess): #T
 	for i in range (0,41):
 		sApproach = sApproach - 0.05
 		obj = least_squares(solveFn, guess, bounds = ([np.deg2rad(-7), np.deg2rad(-102), np.deg2rad(-97-90)], [np.deg2rad(181), np.deg2rad(81), np.deg2rad(86-90)]), method = 'dogbox')
+		#obj = root(solveFn, guess, method='krylov')
 		r = obj.x
 		flag = check(th1,r[0],r[1],r[2],th5)
 		if (flag):
