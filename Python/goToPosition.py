@@ -20,4 +20,4 @@ def GoToPos( x,y,z,gr ):
     #use hint in the above comment if needed
     ser.write(duty[9:18]);
 
-GoToPos(0,20,8.7,'open')
+#GoToPos(0,36,8.7,'open')
