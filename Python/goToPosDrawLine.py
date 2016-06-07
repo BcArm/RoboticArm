@@ -4,9 +4,9 @@ import serial
 from sympy import *
 from InvKin import  invKin 
 from goToDegree import goToDegree
-x, y, z = symbols('x y z')
 
 def DrawLineGoToPos(x0,y0,z0,x1,y1,z1,gr,initial_guess,divisions):
+    x, y, z = symbols('x y z')
     ser = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=3.0)
     xflag = False
     yflag = False
@@ -134,5 +134,6 @@ def DrawLineGoToPos(x0,y0,z0,x1,y1,z1,gr,initial_guess,divisions):
         ser.write(duty[0:9])
         time.sleep(0.01)
         ser.write(duty[9:18])
+    return {'angles':(goToDegree(th1[divisions],th2[divisions]+8,th3[divisions],th4[divisions],th5[divisions],gr)),'guess':[th2[divisions],th3[divisions],th4[divisions]]}
 
-DrawLineGoToPos(0,21.22,12.86,-15,25,8.7,'open',[111.628,70.866,-65.91],10)
+#print DrawLineGoToPos(0,21.22,12.86,-15,25,8.7,'open',[111.628,70.866,-65.91],10)
