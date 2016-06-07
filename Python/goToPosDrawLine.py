@@ -11,6 +11,7 @@ y0 = 25
 z0 = 8.7
 
 def DrawLineGoToPos(x1,y1,z1,gr,initial_guess,divisions):
+    ser = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=3.0)
     xflag = False
     yflag = False
     zflag = False
@@ -107,24 +108,30 @@ def DrawLineGoToPos(x1,y1,z1,gr,initial_guess,divisions):
     print yVec
     print zVec
 
+    s = invKin(xVec[0],yVec[0],zVec[0],[0,0,0])
+    th1 = [s[0]]
+    th2 = [s[1]]
+    th3 = [s[2]]
+    th4 = [s[3]]
+    th5 = [s[4]]
 
-    th1 = []
-    th2 = []
-    th3 = []
-    th4 = []
-    th5 = []
-
-    for i in (1:divisions+1):
-        s = invKinematics(xVec(i),yVec(i),zVec(i),[th2(i-1),th3(i-1),th4(i-1)])
+    for i in range (1,divisions+1):
+        s = invKin(xVec[i],yVec[i],zVec[i],[th2[i-1],th3[i-1],th4[i-1]])
         th1.append(s[0])
         th2.append(s[1])
         th3.append(s[2])
         th4.append(s[3])
         th5.append(s[4])
 
-    ser.write(str(0)+str(0)+str(1))
+    #send number of points
+    if (divisions<10):
+        ser.write(str(0)+str(0)+str(divisions+1)) 
+    elif (divisions<100):
+        ser.write(str(0)+str(divisions+1))
+    else:
+        ser.write(str(divisions+1))
 
-    for i in (0,divisions+1):
+    for i in range (0,divisions+1):
         duty = goToDegree(th1[i],th2[i]+8,th3[i],th4[i],th5[i],gr)
         print(duty)
         time.sleep(0.1)
@@ -132,6 +139,4 @@ def DrawLineGoToPos(x1,y1,z1,gr,initial_guess,divisions):
         time.sleep(0.01)
         ser.write(duty[9:18])
 
-DrawLineGoToPos(10,25,8.7,'open',[0,0,0],10)
-
-
+DrawLineGoToPos(15,25,8.7,'open',[0,0,0],10)

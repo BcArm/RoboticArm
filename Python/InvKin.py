@@ -53,7 +53,7 @@ def invKin(x,y,z,guess): #T
 	for i in range (0,41):
 		sApproach = sApproach - 0.05
 		obj = least_squares(solveFn, guess, bounds = ([np.deg2rad(-7), np.deg2rad(-102), np.deg2rad(-97-90)], [np.deg2rad(181), np.deg2rad(81), np.deg2rad(86-90)]), method = 'dogbox')
-		#obj = root(solveFn, guess, method='krylov')
+		#obj = root(solveFn, guess, method='lm')
 		r = obj.x
 		flag = check(th1,r[0],r[1],r[2],th5)
 		if (flag):
