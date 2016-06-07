@@ -71,11 +71,11 @@ int main(void)
 
 	//Set PWM duty
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,5000 - 364);//////motor1
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - 400);//////motor2
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,5000 - 450);//////gripper
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - 590);//////motor4
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,5000 - 300);//////motor2
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,5000 - 300);//////gripper
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_5,5000 - 550);//////motor4
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6,5000 - 400);//////motor5
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - 500);///////motor3
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - 210);///////motor3
 	/*PWMPulseWidthSet(PWM1_BASE, PWM_OUT_0,364);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_1,130);
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_4,590);
