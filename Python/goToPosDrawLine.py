@@ -6,11 +6,7 @@ from InvKin import  invKin
 from goToDegree import goToDegree
 x, y, z = symbols('x y z')
 
-x0 = -10
-y0 = 25
-z0 = 8.7
-
-def DrawLineGoToPos(x1,y1,z1,gr,initial_guess,divisions):
+def DrawLineGoToPos(x0,y0,z0,x1,y1,z1,gr,initial_guess,divisions):
     ser = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=3.0)
     xflag = False
     yflag = False
@@ -108,7 +104,7 @@ def DrawLineGoToPos(x1,y1,z1,gr,initial_guess,divisions):
     print yVec
     print zVec
 
-    s = invKin(xVec[0],yVec[0],zVec[0],[0,0,0])
+    s = invKin(xVec[0],yVec[0],zVec[0],initial_guess)
     th1 = [s[0]]
     th2 = [s[1]]
     th3 = [s[2]]
@@ -139,4 +135,4 @@ def DrawLineGoToPos(x1,y1,z1,gr,initial_guess,divisions):
         time.sleep(0.01)
         ser.write(duty[9:18])
 
-DrawLineGoToPos(15,25,8.7,'open',[0,0,0],10)
+DrawLineGoToPos(0,21.22,12.86,-15,25,8.7,'open',[111.628,70.866,-65.91],10)

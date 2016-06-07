@@ -12,4 +12,4 @@ def forwardKinematics(th1,th2,th3,th4,th5):
 	
 	return np.round(T,decimals=2)
 
-
+#print forwardKinematics(np.deg2rad(90),np.deg2rad(111.628),np.deg2rad(70.866),np.deg2rad(-65.91-90),0)[:,3]
