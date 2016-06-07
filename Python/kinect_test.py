@@ -18,8 +18,8 @@ def get_position(event, x, y, flags, param):
         fy = 480 / (2 * math.tan(math.radians(43 / 2)))
         yw = zw * (y - 239) / fy
         print xw,yw, zw
-        print -(zw - 78.5), xw + 34, -(yw - 4) + 6.2
-        moveObj(-(zw - 78.5), xw + 34, -(yw - 4) + 6.2)
+        print -(zw - 78), xw + 34, -(yw - 4) + 6.2
+        moveObj(-(zw - 78), xw + 34, -(yw - 4) + 6.2)
         #print -(zw - 81), xw + 30, -(yw - 0.5) + 6.7
         #GoToPos(-(zw - 81), xw + 30, -(yw - 0.5) + 6.7, 'open')
         '''if flag == 1:
