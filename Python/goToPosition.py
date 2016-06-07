@@ -18,7 +18,7 @@ def GoToPos( x,y,z,gr ):
     ser.write(duty[0:9])
     time.sleep(0.01)
     #use hint in the above comment if needed
-    ser.write(duty[9:18]);
+    ser.write(duty[9:18])
 
 
 #GoToPos(-13.583214977050545, 25.125725605442064, 1.0141989694782554,'open')
