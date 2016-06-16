@@ -33,9 +33,9 @@ def goToDegree(deg1,deg2,deg3,deg4,deg5,deg6):
         value5 = 348 
 
     if( deg6 == 'open' ):
-        value6 = 580 
+        value6 = 550 
     else:
-        value6 = 190 
+        value6 = 150 
 
     value1 = int(round(value1))
     value2 = int(round(value2))
