@@ -98,7 +98,6 @@ def getGripperCenter(img):
     while(1):
         cv2.imshow('mouse_img',img)
         k = cv2.waitKey(20) & 0xFF
-        print mouseX,mouseY
         if mouseX != -1000 and mouseY != -1000:
             X = mouseX
             Y = mouseY

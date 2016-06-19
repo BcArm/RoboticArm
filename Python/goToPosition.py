@@ -23,5 +23,5 @@ def GoToPos( x,y,z,gr ):
 
 #GoToPos(-13.583214977050545, 25.125725605442064, 1.0141989694782554,'open')
 #GoToPos(0,21.22,15,'open')
-#GoToPos(-15,31,20,'open')
+#GoToPos(3,18,5,'close')
 #GoToPos(10,21,15,'open')
