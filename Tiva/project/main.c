@@ -160,7 +160,7 @@ int main(void)
 
 	while((oldSum[0]!=364)||(oldSum[1]!=450)||(oldSum[2]!=300)||(oldSum[3]!=200)||(oldSum[4]!=400)||(oldSum[5]!=600))
 	{
-		delayMS(3);
+		delayMS(4);
 		if(364!=oldSum[0])
 		{
 			if(364 > oldSum[0])
@@ -209,14 +209,15 @@ int main(void)
 				oldSum[5]-=1;
 			PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - oldSum[5]);
 		}
-		currentPos.m1 = 5000 - oldSum[0];
-		currentPos.m2 = 5000 - oldSum[1];
-		currentPos.g = 5000 - oldSum[2];
-		currentPos.m4 = 5000 - oldSum[3];
-		currentPos.m5 = 5000 - oldSum[4];
-		currentPos.m3 = 5000 - oldSum[5];
-		EEPROMProgram((uint32_t*) &currentPos, EEPROM_ADRESS, sizeof(currentPos));
 	}
+
+	currentPos.m1 = 5000 - oldSum[0];
+	currentPos.m2 = 5000 - oldSum[1];
+	currentPos.g = 5000 - oldSum[2];
+	currentPos.m4 = 5000 - oldSum[3];
+	currentPos.m5 = 5000 - oldSum[4];
+	currentPos.m3 = 5000 - oldSum[5];
+	EEPROMProgram((uint32_t*) &currentPos, EEPROM_ADRESS, sizeof(currentPos));
 	///////////////
 
 	while(1)
@@ -260,7 +261,7 @@ int main(void)
 
 			while((oldSum[0]!=sum[z][0])||(oldSum[1]!=sum[z][1])||(oldSum[2]!=sum[z][2])||(oldSum[3]!=sum[z][3])||(oldSum[4]!=sum[z][4])||(oldSum[5]!=sum[z][5]))
 			{
-				delayMS(3);
+				delayMS(4);
 				if(sum[z][0]!=oldSum[0])
 				{
 					if(sum[z][0] > oldSum[0])
@@ -309,15 +310,14 @@ int main(void)
 						oldSum[5]-=1;
 					PWMPulseWidthSet(PWM1_BASE, PWM_OUT_7,5000 - oldSum[5]);
 				}
-
-				currentPos.m1 = 5000 - oldSum[0];
-				currentPos.m2 = 5000 - oldSum[1];
-				currentPos.g = 5000 - oldSum[2];
-				currentPos.m4 = 5000 - oldSum[3];
-				currentPos.m5 = 5000 - oldSum[4];
-				currentPos.m3 = 5000 - oldSum[5];
-				EEPROMProgram((uint32_t*) &currentPos, EEPROM_ADRESS, sizeof(currentPos));
 			}
+			currentPos.m1 = 5000 - oldSum[0];
+			currentPos.m2 = 5000 - oldSum[1];
+			currentPos.g = 5000 - oldSum[2];
+			currentPos.m4 = 5000 - oldSum[3];
+			currentPos.m5 = 5000 - oldSum[4];
+			currentPos.m3 = 5000 - oldSum[5];
+			EEPROMProgram((uint32_t*) &currentPos, EEPROM_ADRESS, sizeof(currentPos));
 			/*
 			oldSum[0] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_0);
 			oldSum[1] = PWMPulseWidthGet(PWM1_BASE, PWM_OUT_1);
