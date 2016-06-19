@@ -20,8 +20,7 @@ def get_position(x, y):
     for i in range (0,20):
         get_depth()
 
-        cv2.imshow('RGB image',frame)
-        cv2.imshow('Depth image', depth.astype(np.uint8))
+        #cv2.imshow('Depth image', depth.astype(np.uint8))
         
         zw = 1 / ( ( (depth[y][x])*-0.0030711016 )+ 3.3309495161 )
         zw = 100 * zw
@@ -32,7 +31,7 @@ def get_position(x, y):
         fy = 480 / (2 * math.tan(math.radians(43 / 2)))
         yw = zw * (y - 239) / fy
         sumy = sumy + yw
-
+    print sumx/20, sumy/20, sumz/20
     return [sumx/20, sumy/20, sumz/20]
 
 def go_to_position_mouse(event, x, y, flags, param):
@@ -50,7 +49,7 @@ def go_to_position_mouse(event, x, y, flags, param):
         print xk, yk, zk
 
         point = TRANS_MAT * np.matrix([[xk],[yk],[zk],[1]])
-
+        print point[0],point[1],point[2]
         GoToPos(point[0],point[1],point[2],'close')
 
         #print -(zw - 78), xw + 34, -(yw - 4) + 6.2
@@ -97,12 +96,70 @@ if __name__ == "__main__":
     time.sleep(5)
     kinect_frame_pts.append(get_kinect_frame_pt())
     
-    Kinect_frame_matrix = np.matrix([[kinect_frame_pts[0][0],kinect_frame_pts[1][0],kinect_frame_pts[2][0],kinect_frame_pts[3][0]],\
-                                    [kinect_frame_pts[0][1],kinect_frame_pts[1][1],kinect_frame_pts[2][1],kinect_frame_pts[3][1]],\
-                                    [kinect_frame_pts[0][2],kinect_frame_pts[1][2],kinect_frame_pts[2][2],kinect_frame_pts[3][2]],\
-                                    [1,1,1,1]])
+    GoToPos(-15,31,20,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
 
-    TRANS_MAT = getTransformationMat(Kinect_frame_matrix)
+    GoToPos(10,31,20,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(10,29,15,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(15,29,15,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(-15,20,15,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(-10,20,15,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(3,18,5,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(5,20,25,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(-5,25,25,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+
+    GoToPos(-5,30,6,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+    
+    GoToPos(15,20,6,'close')
+    time.sleep(5)
+    kinect_frame_pts.append(get_kinect_frame_pt())
+    
+    Kinect_frame_matrix = np.matrix([[kinect_frame_pts[0][0],kinect_frame_pts[0][1],kinect_frame_pts[0][2],1],\
+                                    [kinect_frame_pts[1][0],kinect_frame_pts[1][1],kinect_frame_pts[1][2],1],\
+                                    [kinect_frame_pts[2][0],kinect_frame_pts[2][1],kinect_frame_pts[2][2],1],\
+                                    [kinect_frame_pts[3][0],kinect_frame_pts[3][1],kinect_frame_pts[3][2],1],\
+                                    [kinect_frame_pts[4][0],kinect_frame_pts[4][1],kinect_frame_pts[4][2],1],\
+                                    [kinect_frame_pts[5][0],kinect_frame_pts[5][1],kinect_frame_pts[5][2],1],\
+                                    [kinect_frame_pts[6][0],kinect_frame_pts[6][1],kinect_frame_pts[6][2],1],\
+                                    [kinect_frame_pts[7][0],kinect_frame_pts[7][1],kinect_frame_pts[7][2],1],\
+                                    [kinect_frame_pts[8][0],kinect_frame_pts[8][1],kinect_frame_pts[8][2],1],\
+                                    [kinect_frame_pts[9][0],kinect_frame_pts[9][1],kinect_frame_pts[9][2],1],\
+                                    [kinect_frame_pts[10][0],kinect_frame_pts[10][1],kinect_frame_pts[10][2],1],\
+                                    [kinect_frame_pts[11][0],kinect_frame_pts[11][1],kinect_frame_pts[11][2],1],\
+                                    [kinect_frame_pts[12][0],kinect_frame_pts[12][1],kinect_frame_pts[12][2],1],\
+                                    [kinect_frame_pts[13][0],kinect_frame_pts[13][1],kinect_frame_pts[13][2],1],\
+                                    [kinect_frame_pts[14][0],kinect_frame_pts[14][1],kinect_frame_pts[14][2],1],\
+                                    ])
+    print Kinect_frame_matrix.transpose()
+    TRANS_MAT = getTransformationMat(Kinect_frame_matrix.transpose())
+    
+    print TRANS_MAT
 
     cv2.setMouseCallback('RGB image', go_to_position_mouse)
 
