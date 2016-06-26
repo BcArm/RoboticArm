@@ -13,9 +13,10 @@ points = [[-10,25,8.7], [0,21.22,12.86], [0,36,8.7], [10,21,15],  [-15,31,20],
           [10,31,20],   [10,29,15],      [15,29,15], [-15,20,15], [-10,20,15],
           [3,18,5],     [5,20,25],       [-5,25,25], [-5,30,6],   [15,20,6]]
 
+
 kinect_frame_pts = []
-cnt = 1
-done = False
+cnt = 100
+done = True
 TRANS_MAT = np.matrix([])
 
 def go_to_position_mouse(event, y, x, flags, param):
@@ -53,15 +54,19 @@ def go_to_position_mouse(event, y, x, flags, param):
                                             [kinect_frame_pts[13][0],kinect_frame_pts[13][1],kinect_frame_pts[13][2],1],
                                             [kinect_frame_pts[14][0],kinect_frame_pts[14][1],kinect_frame_pts[14][2],1],])
 
-                #print kinect_frame_pts
+                print kinect_frame_pts
                 #print Kinect_frame_matrix.transpose()
                 TRANS_MAT = getTransformationMat(Kinect_frame_matrix.transpose())
-        print TRANS_MAT
             else:
+                TRANS_MAT = [[1.38884742e-01,   7.14152672e-02,  -9.97560137e-01,   9.08830124e+01],
+			     [1.20949309e+00,  -9.34430346e-02,  -1.09917642e-01,   2.06001291e+01],
+			     [-6.30752771e-02,   1.29666723e+00,   8.56265774e-02,   8.16176389e+00],
+ 			     [0.00000000e+00,   8.67361738e-18,  -1.11022302e-16,   1.00000000e+00]]
+
                 point = TRANS_MAT * np.matrix([[xw],[yw],[zw],[1]])
                 print point[0],point[1],point[2]
-        moveObj(point[0],point[1],point[2],0,21.22,12.86)
-                #GoToPos(point[0],point[1],point[2],'open')
+		moveObj(point[0],point[1],point[2],0,21.22,12.86)
+                #GoToPos(point[0],point[1],point[2],'close')
 
 
 
@@ -95,3 +100,10 @@ if __name__ == "__main__":
         if k == 27:
             break;
     cv2.destroyAllWindows()
+
+'''
+[[ -8.73518545e-02   3.42639547e-02   1.04736031e+00  -1.12625137e+02]
+ [ -1.27819256e+00   1.33185250e-01   4.79458925e-02   2.11333555e+01]
+ [ -2.83788223e-02   1.29829154e+00   1.08071660e-01   1.65809201e+00]
+ [  5.55111512e-17   0.00000000e+00  -4.44089210e-16   1.00000000e+00]]
+'''
