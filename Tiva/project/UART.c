@@ -46,7 +46,7 @@ void UART_Init(void){
  // UART0_IBRD_R = 520;                    // IBRD = int(80,000,000 / (16 * 9600)) = 520
  // UART0_FBRD_R = 53;                    // FBRD = round(5/6 * 64) = 53
   UART0_IBRD_R = 8;                    // IBRD = int(16,000,000 / (16 * 115200))
-  UART0_FBRD_R = 44;                    // FBRD = round(0.0.68055 * 64) = 44
+  UART0_FBRD_R = 44;                    // FBRD = round(0.68055 * 64) = 44
   UART0_LCRH_R = (UART_LCRH_WLEN_8|UART_LCRH_FEN);
   UART0_CTL_R |= UART_CTL_UARTEN;       // enable UART
   GPIO_PORTA_AFSEL_R |= 0x03;           // enable alt funct on PA1,PA0

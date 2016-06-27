@@ -16,7 +16,9 @@ main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/inc/hw_types.h
 main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/inc/hw_memmap.h
 main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/inc/hw_ints.h
 main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/sysctl.h
+main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/interrupt.h
 main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/gpio.h
+main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/timer.h
 main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/pwm.h
 main.obj: c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/eeprom.h
 main.obj: ../UART.h
@@ -41,7 +43,9 @@ c:/ti/TivaWare_C_Series-2.1.0.12573/inc/hw_types.h:
 c:/ti/TivaWare_C_Series-2.1.0.12573/inc/hw_memmap.h: 
 c:/ti/TivaWare_C_Series-2.1.0.12573/inc/hw_ints.h: 
 c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/sysctl.h: 
+c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/interrupt.h: 
 c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/gpio.h: 
+c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/timer.h: 
 c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/pwm.h: 
 c:/ti/TivaWare_C_Series-2.1.0.12573/driverlib/eeprom.h: 
 ../UART.h: 
